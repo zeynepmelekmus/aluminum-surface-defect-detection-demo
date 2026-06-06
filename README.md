@@ -1,6 +1,6 @@
 # Mini Yüzey Hatası Tespit Uygulaması
 
-Bu proje, TÜBİTAK 2247-C STAR bursiyer başvurusu kapsamında hazırlanmış mini **alüminyum yüzey hatası tespit ve raporlama** prototipidir. Uygulama, 1505 kodlu sanayi projesinde ihtiyaç duyulan yüzey hata tespiti akışını küçük ve çalıştırılabilir bir demo olarak simüle eder. Amaç; kısa sürede çalıştırılabilir, okunabilir, Docker ile ayağa kalkabilen ve ileride PyTorch tabanlı hazır modelle değiştirilebilir bir yazılım mimarisi göstermektir.
+Bu proje, **TÜBİTAK 2247-C STAR bursiyer başvurusu** kapsamında hazırlanmış mini **alüminyum yüzey hatası tespit ve raporlama** prototipidir. Uygulama, **5250065** Proje Nolu ve *"Konform Teknolojisi ile Üretilen Alüminyum Sektörlerin İmalatı Aşamasında Meydana Gelen Yüzey Hatalarının Derin Öğrenme Yöntemleriyle Tespiti ve Sınıflandırılması"* başlıklı TÜBİTAK 1505 sanayi projesinde ihtiyaç duyulan yüzey hata tespiti akışını küçük ve çalıştırılabilir bir demo olarak simüle eder. Amaç; kısa sürede çalıştırılabilir, okunabilir, Docker ile ayağa kalkabilen ve ileride PyTorch tabanlı hazır modelle değiştirilebilir bir yazılım mimarisi göstermektir.
 
 ## Özellikler
 
@@ -37,8 +37,8 @@ Arayüz kodu model tahmin detaylarını bilmez. Tüm tespit işlemi `DetectionSe
 ## Lokal Çalıştırma
 
 ```bash
-python3 -m venv tubitak_env
-source tubitak_env/bin/activate
+python3 -m venv .venv
+source .venv/bin/activate
 python -m pip install --upgrade pip
 pip install -r requirements.txt
 streamlit run app/main.py
