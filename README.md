@@ -1,6 +1,6 @@
 # Mini Yüzey Hatası Tespit Uygulaması
 
-Bu proje, **TÜBİTAK 2247-C STAR bursiyer başvurusu** kapsamında hazırlanmış mini **alüminyum yüzey hatası tespit ve raporlama** prototipidir. Uygulama, **5250065** Proje Nolu ve *"Konform Teknolojisi ile Üretilen Alüminyum Sektörlerin İmalatı Aşamasında Meydana Gelen Yüzey Hatalarının Derin Öğrenme Yöntemleriyle Tespiti ve Sınıflandırılması"* başlıklı TÜBİTAK 1505 sanayi projesinde ihtiyaç duyulan yüzey hata tespiti akışını küçük ve çalıştırılabilir bir demo olarak simüle eder. Amaç; kısa sürede çalıştırılabilir, okunabilir, Docker ile ayağa kalkabilen ve ileride PyTorch tabanlı hazır modelle değiştirilebilir bir yazılım mimarisi göstermektir.
+Bu proje, alüminyum profil imalatı aşamasında meydana gelen yüzey hatalarının derin öğrenme yöntemleriyle tespiti ve sınıflandırılması süreçlerini simüle eden mini bir **alüminyum yüzey hatası tespit ve raporlama** prototipidir. Amaç; kısa sürede çalıştırılabilir, okunabilir, Docker ile kolayca ayağa kaldırılabilen ve ileride PyTorch tabanlı hazır bir modelle doğrudan değiştirilebilecek modüler bir yazılım mimarisi göstermektir.
 
 ## Özellikler
 
@@ -36,8 +36,11 @@ Arayüz kodu model tahmin detaylarını bilmez. Tüm tespit işlemi `DetectionSe
 
 ## Lokal Çalıştırma
 
+> [!NOTE]
+> Uygulamanın ve kütüphane bağımlılıklarının (Pillow, Ultralytics vb.) sorunsuz kurulması için **Python 3.11** stabil sürümünün kullanılması önerilir. Python 3.14 gibi önizleme/geliştirme sürümleri derleme hatalarına sebep olabilir.
+
 ```bash
-python3 -m venv .venv
+python3.11 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
 pip install -r requirements.txt
@@ -100,26 +103,6 @@ models/best.pt
 ```
 
 Model veya bağımlılık yüklenemezse uygulama otomatik mock sonuç üretir. Bu sayede demo ortamında model çalışmasa bile temel işlevler gösterilebilir.
-
-## Önerilen Git Commit Sırası
-
-```bash
-git init
-git add README.md .gitignore requirements.txt Dockerfile
-git commit -m "Initialize project"
-
-git add app/detection_service.py models/best.pt data/sample_images
-git commit -m "Add modular detection service and sample assets"
-
-git add app/main.py
-git commit -m "Create Streamlit control panel UI"
-
-git add app/report_service.py
-git commit -m "Add JSON and CSV report generation"
-
-git add Dockerfile README.md
-git commit -m "Add Docker support and usage documentation"
-```
 
 ## Demo Açıklaması
 
