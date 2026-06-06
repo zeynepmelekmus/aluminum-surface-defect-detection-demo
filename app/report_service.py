@@ -3,11 +3,18 @@ from __future__ import annotations
 from datetime import datetime
 from pathlib import Path
 import json
+import re
 import pandas as pd
 
 
 REPORT_DIR = Path("reports")
 REPORT_DIR.mkdir(exist_ok=True)
+
+
+def _get_safe_id(product_id: str) -> str:
+    # Remove/replace characters that are invalid in filenames on Windows, Mac, or Linux: \ / : * ? " < > | and spaces
+    safe = re.sub(r'[\\/*?:"<>| ]', '_', product_id)
+    return safe or "product"
 
 
 def build_report_payload(product_name: str, product_id: str, threshold: float, detections: list[dict]) -> dict:
@@ -22,14 +29,14 @@ def build_report_payload(product_name: str, product_id: str, threshold: float, d
 
 
 def save_json_report(payload: dict) -> Path:
-    safe_id = payload.get("product_id", "product").replace("/", "-").replace(" ", "_")
+    safe_id = _get_safe_id(payload.get("product_id", "product"))
     path = REPORT_DIR / f"report_{safe_id}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
     return path
 
 
 def save_csv_report(payload: dict) -> Path:
-    safe_id = payload.get("product_id", "product").replace("/", "-").replace(" ", "_")
+    safe_id = _get_safe_id(payload.get("product_id", "product"))
     path = REPORT_DIR / f"report_{safe_id}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
     df = pd.DataFrame(payload.get("defects", []))
     if df.empty:
@@ -39,3 +46,4 @@ def save_csv_report(payload: dict) -> Path:
     df.insert(2, "threshold", payload.get("threshold", ""))
     df.to_csv(path, index=False, encoding="utf-8-sig")
     return path
+

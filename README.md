@@ -39,9 +39,29 @@ Arayüz kodu model tahmin detaylarını bilmez. Tüm tespit işlemi `DetectionSe
 > [!NOTE]
 > Uygulamanın ve kütüphane bağımlılıklarının (Pillow, Ultralytics vb.) sorunsuz kurulması için **Python 3.11** stabil sürümünün kullanılması önerilir. Python 3.14 gibi önizleme/geliştirme sürümleri derleme hatalarına sebep olabilir.
 
+### macOS & Linux
 ```bash
 python3.11 -m venv .venv
 source .venv/bin/activate
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+streamlit run app/main.py
+```
+
+### Windows
+```cmd
+:: Command Prompt (CMD)
+python -m venv .venv
+.venv\Scripts\activate
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+streamlit run app/main.py
+```
+veya PowerShell kullanıyorsanız:
+```powershell
+# PowerShell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
 pip install -r requirements.txt
 streamlit run app/main.py
@@ -57,9 +77,14 @@ http://localhost:8501
 
 Kod kalitesini ve servis katmanlarının bütünlüğünü doğrulamak için aşağıdaki komut ile birim testlerini çalıştırabilirsiniz:
 
-```bash
-PYTHONPATH=. python -m unittest discover -s tests
-```
+- **macOS / Linux:**
+  ```bash
+  python3 -m unittest discover -s tests
+  ```
+- **Windows:**
+  ```cmd
+  python -m unittest discover -s tests
+  ```
 
 
 ## Docker ile Çalıştırma
