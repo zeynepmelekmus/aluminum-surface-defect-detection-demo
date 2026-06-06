@@ -1,0 +1,5 @@
+streamlit==1.45.1
+pandas==2.2.3
+pillow==11.2.1
+# Optional real model support. If installation is heavy during demo, app still works in mock mode.
+ultralytics==8.3.146
